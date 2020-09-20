@@ -1,3 +1,4 @@
+# coding=utf-8
 """Setup script for database_operations"""
 
 import os.path
@@ -17,7 +18,7 @@ setup(
     description="Work with Database as it is dataframe, No need to remember sql queries",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/AnkushBhise/database_operations",
+    url="https://github.com/AnkushBhise/database_operations/",
     author="Ankush Bhise",
     author_email="ankushbhise.18@gmail.com",
     license="MIT",
@@ -26,7 +27,7 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
     ],
-    packages=["database_operations"],
+    packages=["mysql"],
     include_package_data=True,
     install_requires=[
         "pandas", "sqlalchemy", "pymysql"

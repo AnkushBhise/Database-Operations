@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+This file is for mysql database connection for user to use database operations as dataframe operations
+"""
 from utils.data_structure_conversion import ListConversion
 import pandas
 import sqlalchemy
