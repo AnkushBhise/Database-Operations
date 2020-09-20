@@ -2,7 +2,7 @@
 """Setup script for database_operations"""
 
 import os.path
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # The directory containing this file
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -27,7 +27,7 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
     ],
-    packages=["mysql"],
+    packages=find_packages(),
     include_package_data=True,
     install_requires=[
         "pandas", "sqlalchemy", "pymysql"
