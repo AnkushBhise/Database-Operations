@@ -3,7 +3,9 @@ import itertools
 
 
 class ListConversion:
-	
+	"""
+	This class is to convert one dtype to other dtype
+	"""
 	@staticmethod
 	def list_of_tuple_to_list(list_of_tuple):
 		"""

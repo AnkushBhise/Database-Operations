@@ -1,8 +1,11 @@
 # coding=utf-8
 """
 databaseops
-See https://github.com/AnkushBhise/database-operations/ for more information
+See https://github.com/AnkushBhise/databaseops/ for more information
 """
 
-# Version of database-operations's sub-package mysql
+# Version of databaseops
 __version__ = "0.1.4"
+
+# Create imports from project to make every thing available at top level
+from databaseops.mysql.operations import MySQLOps

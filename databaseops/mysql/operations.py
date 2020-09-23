@@ -2,14 +2,15 @@
 """
 This file is for mysql database connection for user to use database operations as dataframe operations
 """
-from databaseops._helper import ListConversion
+
 import pandas
 import sqlalchemy
 import pymysql.connections
 import warnings
+from databaseops._helper import _data_type_conversions
 
 
-class Operations(ListConversion):
+class MySQLOps(_data_type_conversions.ListConversion):
 	"""
 	TODO: Make everything multiprocess as well as sequential for debug propose
 	
