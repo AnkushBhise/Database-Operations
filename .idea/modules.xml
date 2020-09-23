@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/database_operations.iml" filepath="$PROJECT_DIR$/.idea/database_operations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/databaseops.iml" filepath="$PROJECT_DIR$/.idea/databaseops.iml" />
     </modules>
   </component>
 </project>
