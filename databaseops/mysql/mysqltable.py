@@ -7,13 +7,13 @@ import pandas
 import sqlalchemy
 import pymysql.connections
 import warnings
-from databaseops._helper import _data_type_conversions
+from .mysqldatabase import MySQLDataBase
 
 
-class MySQLOps(_data_type_conversions.ListConversion):
+class MySQLTable(MySQLDataBase):
     """
     TODO: Make everything multiprocess as well as sequential for debug propose
-    
+
         :param host:
         :type host:
         :param user:
@@ -22,48 +22,60 @@ class MySQLOps(_data_type_conversions.ListConversion):
         :type password:
     """
     
-    def __init__(self, host: str, user: str, password: str) -> None:
-        self.host = host
-        self.user = user
-        self.password = password
+    def __init__(self, host: str, user: str, password: str, db_name: str, table_name: str) -> None:
+        if not hasattr(self, "host") or not hasattr(self, "user") or not hasattr(self, "password") or not hasattr(
+                self, "db_name"):
+            MySQLDataBase.__init__(self, host, user, password, db_name)
+        self.table_name = table_name
+        self.__sqlalchemy()
     
-    def __initial_conn_db(self, **kwargs: object) -> [pymysql.connections.Connection, pymysql.cursors.Cursor]:
+    @staticmethod
+    def __update_insertion_method(meta):
         """
 
-        :param kwargs:
-        :type kwargs:
+        :param meta:
         :return:
-        :rtype:
         """
-        my_db = pymysql.connect(host=self.host, user=self.user, passwd=self.password, **kwargs)
-        my_cursor = my_db.cursor()
-        return my_db, my_cursor
+        
+        def method(table, conn, keys, data_iter):
+            sql_table = sqlalchemy.Table(table.name, meta, autoload=True)
+            insert_stmt = sqlalchemy.dialects.mysql.insert(sql_table).values(
+                [dict(zip(keys, data)) for data in data_iter])
+            upsert_stmt = insert_stmt.on_duplicate_key_update({x.name: x for x in insert_stmt.inserted})
+            conn.execute(upsert_stmt)
+        
+        return method
     
-    def initialize_database(self, db_name: str) -> None:
+    def __sqlalchemy(self) -> None:
+        """
+        
+        :return:
+        """
+        self.sqlalchemy_engine = sqlalchemy.create_engine(
+            f"mysql+pymysql://{self.user}:{self.password}@{self.host}/{self.db_name}", isolation_level="AUTOCOMMIT")
+        self.conn = self.sqlalchemy_engine.connect()
+    
+    def populate_table(self, dataframe: pandas.DataFrame, if_exists: str = 'append') -> None:
         """
 
-        :param db_name:
-        :type db_name:
-        """
-        self.db_name = db_name
-        db, cursor = self.__initial_conn_db()
-        cursor.execute("Show Databases")
-        if self.db_name.lower() not in self.list_of_tuple_to_list([i for i in cursor]):
-            cursor.execute(f"Create Database {self.db_name}")
-        (self.my_db, self.my_cursor) = self.__initial_conn_db(database=self.db_name)
-    
-    def populate_table(self, table_name: str, dataframe: pandas.DataFrame) -> None:
-        """
-
+        :param if_exists:
         :param dataframe:
         :type dataframe:
-        :param table_name:
-        :type table_name:
         """
-        self.table_name = table_name
-        sqlalchemy_engine = sqlalchemy.create_engine(
-            f"mysql+pymysql://{self.user}:{self.password}@{self.host}/{self.db_name}", isolation_level="AUTOCOMMIT")
-        dataframe.to_sql(name=self.table_name, con=sqlalchemy_engine, if_exists='append', method='multi')
+        dataframe.to_sql(name=self.table_name, con=self.sqlalchemy_engine, if_exists=if_exists, method=None)
+    
+    def update_table(self, dataframe: pandas.DataFrame, if_exists: str = 'append') -> None:
+        """
+
+        :param if_exists:
+        :param table_name:
+        :param dataframe:
+        :return:
+        """
+        with self.conn.begin():
+            meta = sqlalchemy.MetaData(self.conn)
+        dataframe.to_sql(name=self.table_name, con=self.sqlalchemy_engine, if_exists=if_exists,
+                         method=self.__update_insertion_method(meta))
     
     def get_data_type(self) -> dict:
         """
@@ -141,6 +153,37 @@ class MySQLOps(_data_type_conversions.ListConversion):
             query = query + col_and_order_str
         self.my_cursor.execute(query=query)
     
+    def table_filter(self, where: list, select: str or list = None, limit: int = None,
+                     chunksize: int = None) -> pandas.DataFrame:
+        """
+        :return: pandas dataframe
+        """
+        if select:
+            if isinstance(select, list):
+                query = "SELECT " + " ,".join(select)
+            elif isinstance(select, str):
+                query = "SELECT " + select
+        else:
+            query = "SELECT *"
+        query = query + f" FROM {self.table_name}" + " where " + " ,".join(where)
+        if limit:
+            query = query + f" LIMIT {limit}"
+        return pandas.read_sql_query(sql=query, con=self.sqlalchemy_engine, chunksize=chunksize)
+    
+    def read_table(self, chunksize: int = None):
+        """
+        TODO: read table from database with column names and without column names (All Columns)
+        use yield to achieve iteration over object and commit changes into same table or create new table
+        :return: pandas dataframe, if chuck size is given databaseops.MySQL object
+        """
+        return pandas.read_sql_table(table_name=self.table_name, con=self.sqlalchemy_engine, chunksize=chunksize)
+    
+    def commit(self):
+        """
+        TODO: Commit changes to database table
+        :return: None
+        """
+    
     def where(self):
         """
         TODO: create where function with multiple value serach and use dictiory to achive
@@ -153,37 +196,4 @@ class MySQLOps(_data_type_conversions.ListConversion):
 
         :param function:
         :type function:
-        """
-    
-    def __read_table_chunks(self):
-        """
-        this is internal method tobe used inside class only
-        :return:
-        :rtype:
-        """
-    
-    def join_table(self):
-        """
-        TODO: create join table with foreign key
-        use yield to achieve iteration over object and commit changes into same table or create new table
-        :return: pandas dataframe if chuck size is given, databaseops.MySQL object
-        """
-    
-    def read_table(self):
-        """
-        TODO: read table from database with column names and without column names (All Columns)
-        use yield to achieve iteration over object and commit changes into same table or create new table
-        :return: pandas dataframe if chuck size is given, databaseops.MySQL object
-        """
-    
-    def commit(self):
-        """
-        TODO: Commit changes to database table
-        :return: None
-        """
-    
-    def filter(self):
-        """
-        TODO: Filer the table based on one or multiple condition
-        :return: pandas dataframe
         """

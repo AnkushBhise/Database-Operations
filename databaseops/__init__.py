@@ -8,4 +8,6 @@ See https://github.com/AnkushBhise/databaseops/ for more information
 __version__ = "0.1.18"
 
 # Create imports from project to make every thing available at top level
-from databaseops.mysql.operations import MySQLOps
+from databaseops import mysql
+from databaseops.mysql import MySQLOps
+from databaseops.mysql import MySQLTable
