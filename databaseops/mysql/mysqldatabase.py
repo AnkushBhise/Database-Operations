@@ -4,12 +4,23 @@ This file is for mysql database connection for user to use database operations a
 """
 
 import pymysql.connections
-from databaseops.helper import ListConversion
+from ..helper import ListConversion
 
 
 class MySQLDataBase(ListConversion):
     
     def __init__(self, host: str, user: str, password: str, db_name: str) -> None:
+        """
+        This class creates connection between python and MySQL database.
+        If database exists name as db_name, it will create connection to that database.
+        Otherwise it will create database name as db_name, will connect to that
+        database. Object instance of this class will contain connection link and
+        cursor link to given database.
+        :param host: Host name of MySQL database.
+        :param user: User name of MySQL database.
+        :param password: Password for above user name of MySQL database.
+        :param db_name: Any MySQL database name from MySQL database.
+        """
         self.db_name = db_name
         self.host = host
         self.user = user
@@ -18,11 +29,10 @@ class MySQLDataBase(ListConversion):
     
     def __initial_conn_db(self, **kwargs: object) -> [pymysql.connections.Connection, pymysql.cursors.Cursor]:
         """
-
-        :param kwargs:
-        :type kwargs:
-        :return:
-        :rtype:
+        
+        :param kwargs: Args like database will be passed.
+        :return: connection link and cursor link to given database, If database
+        argument is not given connection link and cursor link entire MySQL database.
         """
         my_db = pymysql.connect(host=self.host, user=self.user, passwd=self.password, **kwargs)
         my_cursor = my_db.cursor()
@@ -30,9 +40,10 @@ class MySQLDataBase(ListConversion):
 
     def __initialize_database(self) -> None:
         """
-
-        :param db_name:
-        :type db_name:
+        
+        This method create connection link and cursor link for given db_name inside
+        object instance
+        :return: None
         """
         db, cursor = self.__initial_conn_db()
         cursor.execute("Show Databases")

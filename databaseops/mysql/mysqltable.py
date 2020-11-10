@@ -11,18 +11,17 @@ from .mysqldatabase import MySQLDataBase
 
 
 class MySQLTable(MySQLDataBase):
-    """
-    TODO: Make everything multiprocess as well as sequential for debug propose
-
-        :param host:
-        :type host:
-        :param user:
-        :type user:
-        :param password:
-        :type password:
-    """
     
     def __init__(self, host: str, user: str, password: str, db_name: str, table_name: str) -> None:
+        """
+        The object instance of this class will able to perform multiple operations
+        on database table like read, filter, sort, remove_duplicates, update etc.
+        :param host: Host name of MySQL database.
+        :param user: User name of MySQL database.
+        :param password: Password for above user name of MySQL database.
+        :param db_name: Any MySQL database name from MySQL database.
+        :param table_name: Table name from above MySQL database.
+        """
         if not hasattr(self, "host") or not hasattr(self, "user") or not hasattr(self, "password") or not hasattr(
                 self, "db_name"):
             MySQLDataBase.__init__(self, host, user, password, db_name)
@@ -30,11 +29,11 @@ class MySQLTable(MySQLDataBase):
         self.__sqlalchemy()
     
     @staticmethod
-    def __update_insertion_method(meta):
+    def __update_insertion_method(meta: sqlalchemy.MetaData):
         """
-
-        :param meta:
-        :return:
+        This is privet method. Created for internal used only.
+        :param meta: This is the metadata for MySQL database table.
+        :return: It returns the method which will be used into update_table.
         """
         
         def method(table, conn, keys, data_iter):
@@ -48,8 +47,8 @@ class MySQLTable(MySQLDataBase):
     
     def __sqlalchemy(self) -> None:
         """
-        
-        :return:
+        This is privet method. Created for internal used only.
+        :return: None, But create sqlalchemy_engine.connect inside object instance.
         """
         self.sqlalchemy_engine = sqlalchemy.create_engine(
             f"mysql+pymysql://{self.user}:{self.password}@{self.host}/{self.db_name}", isolation_level="AUTOCOMMIT")
@@ -57,20 +56,24 @@ class MySQLTable(MySQLDataBase):
     
     def populate_table(self, dataframe: pandas.DataFrame, if_exists: str = 'append') -> None:
         """
-
-        :param if_exists:
-        :param dataframe:
-        :type dataframe:
+        This method add dataframe data to MySQL table.
+        :param dataframe: This is pandas.DataFrame which need to added to table.
+        :param if_exists: This parameter will decide what to do if table name
+        table_name already exists. Options are 'fail', 'replace' and 'append'.
+        **Note:** This parameter is about table, Don't confuse it about data inside table.
+        :return: None.
         """
         dataframe.to_sql(name=self.table_name, con=self.sqlalchemy_engine, if_exists=if_exists, method=None)
     
     def update_table(self, dataframe: pandas.DataFrame, if_exists: str = 'append') -> None:
         """
-
-        :param if_exists:
-        :param table_name:
-        :param dataframe:
-        :return:
+        This method will replace data in table if it already exist based upon primary
+        key of table.
+        :param dataframe: This is pandas.DataFrame which need to added to table.
+        :param if_exists: This parameter will decide what to do if table name
+        table_name already exists. Options are 'fail', 'replace' and 'append'.
+        **Note:** This parameter is about table, Don't confuse it about data inside table.
+        :return: None.
         """
         with self.conn.begin():
             meta = sqlalchemy.MetaData(self.conn)
@@ -79,18 +82,20 @@ class MySQLTable(MySQLDataBase):
     
     def get_data_type(self) -> dict:
         """
-
-        :return:
-        :rtype:
+        This method will give you column name and there data type for entire table.
+        :return: dictionary with column name as key and data type as value.
         """
         self.my_cursor.execute(f"Show fields from {self.table_name}")
         return {i[0]: i[1] for i in self.my_cursor}
     
     def remove_duplicates(self, list_of_columns: list) -> None:
         """
-
-        :param list_of_columns:
-        :type list_of_columns:
+        This method will delete duplicates rows from table based upon give list
+        of columns. Be caution, as it will directly affect the source table with
+        no way of going back.
+        :param list_of_columns: list of columns names which should be used for
+        removing duplicate values.
+        :return: None.
         """
         warnings.warn(f"Removing duplicate entries from columns {','.join(list_of_columns)}", stacklevel=2)
         for col in list_of_columns:
@@ -101,11 +106,14 @@ class MySQLTable(MySQLDataBase):
     
     def set_primary_key(self, column_name: str or list, remove_duplicates=True) -> None:
         """
-
-        :param column_name:
-        :type column_name:
-        :param remove_duplicates:
-        :type remove_duplicates:
+        This method will set "column_name" as primary key for table. caution: By
+        default it remove duplicate value for "column_name".
+        :param column_name: If str, then it will set as primary key. If list, then
+        composite primary key will get created.
+        :param remove_duplicates: Either you want delete duplicate value for given
+        columns or not. Pass this as False if you don't to remove duplicate on given
+        columns, But it will raise exception and primary key will not be set. As
+        primary key need to have unique values.
         """
         if isinstance(column_name, str):
             column_name = [column_name]
@@ -122,11 +130,11 @@ class MySQLTable(MySQLDataBase):
     
     def set_unique_keys(self, column_name: str or list, remove_duplicates=True) -> None:
         """
-
-        :param column_name:
-        :type column_name:
-        :param remove_duplicates:
-        :type remove_duplicates:
+        This method will set columns to contain only unique values.
+        :param column_name: Column names of database table.
+        :param remove_duplicates: Either you want delete duplicate value for given
+        columns or not. Pass this as False, if you don't to remove duplicate on given
+        columns, But it will raise exception.
         """
         if isinstance(column_name, str):
             column_name = [column_name]
@@ -141,7 +149,13 @@ class MySQLTable(MySQLDataBase):
             raise UserWarning(f"Duplicate entries in column {','.join(columns)},"
                               f" remove_duplicates attribute should be true in case of duplicates")
     
-    def sort_table(self, column: str or dict, order="ascending" or "descending") -> None:
+    def sort_table(self, column: str or dict, order="ascending") -> None:
+        """
+        This method will perform sort operation on source database table.
+        :param column: Base on this sorting operation will be performed.
+        :param order: Order of sorting, Which can "ascending" or "descending"
+        :return: None
+        """
         if isinstance(column, str):
             query = f"SELECT * FROM {self.table_name} ORDER BY {column} {order}"
         elif isinstance(column, dict):
@@ -156,7 +170,15 @@ class MySQLTable(MySQLDataBase):
     def table_filter(self, where: list, select: str or list = None, limit: int = None,
                      chunksize: int = None) -> pandas.DataFrame:
         """
-        :return: pandas dataframe
+        If you want read filtered table use this method.
+        :param where: list of conditions in string format. Ex: ["column_Name = value"]
+         OR ["column_Name = Value and  column_Name > Value"] OR
+         ["column_Name = Value OR column_Name > Value"]
+        :param select: Will only return data for these columns. If None, will
+        return complete data
+        :param limit: Number of rows
+        :param chunksize: Number of rows in one iteration.
+        :return: pandas.DataFrame if chunksize is None else iterable object.
         """
         if select:
             if isinstance(select, list):
@@ -172,28 +194,10 @@ class MySQLTable(MySQLDataBase):
     
     def read_table(self, chunksize: int = None):
         """
-        TODO: read table from database with column names and without column names (All Columns)
-        use yield to achieve iteration over object and commit changes into same table or create new table
-        :return: pandas dataframe, if chuck size is given databaseops.MySQL object
+        This method will read table as pandas.DataFrame if chunksize is not given else
+        it will return object which can be iterated in for loop every loop will
+        given pandas.DataFrame of chunksize.
+        :param chunksize: number of row you want read at one time.
+        :return: pandas.DataFrame or Iterable object which will give pandas.DataFrame
         """
         return pandas.read_sql_table(table_name=self.table_name, con=self.sqlalchemy_engine, chunksize=chunksize)
-    
-    def commit(self):
-        """
-        TODO: Commit changes to database table
-        :return: None
-        """
-    
-    def where(self):
-        """
-        TODO: create where function with multiple value serach and use dictiory to achive
-
-        """
-    
-    def apply_on_table(self, function):
-        """
-        TODO: Create function which will take function as input and perform operations on chunks of data
-
-        :param function:
-        :type function:
-        """
