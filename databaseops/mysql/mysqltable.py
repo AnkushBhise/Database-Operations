@@ -167,8 +167,8 @@ class MySQLTable(MySQLDataBase):
             query = query + col_and_order_str
         self.my_cursor.execute(query=query)
     
-    def table_filter(self, where: list, select: str or list = None, limit: int = None,
-                     chunksize: int = None) -> pandas.DataFrame:
+    def table_filter(self, where: list, select: str or list = None,
+                     limit: int = None, chunksize: int = None) -> pandas.DataFrame:
         """
         If you want read filtered table use this method.
         :param where: list of conditions in string format. Ex: ["column_Name = value"]
