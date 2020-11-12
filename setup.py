@@ -15,7 +15,7 @@ with open(os.path.join(HERE, "README.md")) as fid:
 # This call to setup() does all the work
 setup(
 	name="databaseops",
-	version="0.1.18",
+	version="1.0.0",
 	description="Work with Database as it is dataframe, No need to remember sql queries",
 	long_description=README,
 	long_description_content_type="text/markdown",

@@ -10,7 +10,7 @@ Welcome to DatabaseOps's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   introduction
+   readme_link
    databaseops.mysql
 
 
