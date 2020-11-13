@@ -13,8 +13,14 @@ class ListConversion:
     @staticmethod
     def list_of_tuple_to_list(list_of_tuple: list) -> list:
         """
-        This method list of tuples to list.
-        :param list_of_tuple: list containing multiple tuples
-        :return: list contain values from the tuples
+        This method will convert list of tuples to list.
+        
+        Parameters
+        ----------
+        list_of_tuple : list containing multiple tuples
+
+        Returns
+        -------
+        list contain values from the all tuples
         """
         return list(itertools.chain(*list_of_tuple))

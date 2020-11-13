@@ -95,7 +95,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">DatabaseOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">Table of Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id1">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id4">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id5">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#roadmap">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id6">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id7">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id8">Project status</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../databaseops.mysql.html">databaseops.mysql package</a></li>
 </ul>
 
@@ -179,10 +186,17 @@
 <span class="sd">        Otherwise it will create database name as db_name, will connect to that</span>
 <span class="sd">        database. Object instance of this class will contain connection link and</span>
 <span class="sd">        cursor link to given database.</span>
-<span class="sd">        :param host: Host name of MySQL database.</span>
-<span class="sd">        :param user: User name of MySQL database.</span>
-<span class="sd">        :param password: Password for above user name of MySQL database.</span>
-<span class="sd">        :param db_name: Any MySQL database name from MySQL database.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        host : Host name of MySQL database.</span>
+<span class="sd">        </span>
+<span class="sd">        user : User name of MySQL database.</span>
+<span class="sd">        </span>
+<span class="sd">        password : Password for above user name of MySQL database.</span>
+<span class="sd">        </span>
+<span class="sd">        db_name : Any MySQL database name from MySQL database, which you want</span>
+<span class="sd">        connect.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db_name</span> <span class="o">=</span> <span class="n">db_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
@@ -192,10 +206,17 @@
     
     <span class="k">def</span> <span class="nf">__initial_conn_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">pymysql</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">cursors</span><span class="o">.</span><span class="n">Cursor</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This is privet method. Created for internal used only.</span>
 <span class="sd">        </span>
-<span class="sd">        :param kwargs: Args like database will be passed.</span>
-<span class="sd">        :return: connection link and cursor link to given database, If database</span>
-<span class="sd">        argument is not given connection link and cursor link entire MySQL database.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kwargs : Args like database will be passed.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pymysql.connections.Connection, pymysql.cursors.Cursor</span>
+<span class="sd">            connection link and cursor link to given database, If database</span>
+<span class="sd">            argument is not given connection link and cursor link entire MySQL database.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">my_db</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">my_cursor</span> <span class="o">=</span> <span class="n">my_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
@@ -203,10 +224,14 @@
 
     <span class="k">def</span> <span class="nf">__initialize_database</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        </span>
+<span class="sd">        This is privet method. Created for internal used only.</span>
 <span class="sd">        This method create connection link and cursor link for given db_name inside</span>
 <span class="sd">        object instance</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            This methods returns nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">db</span><span class="p">,</span> <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__initial_conn_db</span><span class="p">()</span>
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;Show Databases&quot;</span><span class="p">)</span>

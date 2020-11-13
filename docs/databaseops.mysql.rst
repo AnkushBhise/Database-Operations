@@ -1,8 +1,15 @@
 databaseops\.mysql package
 ==========================
 
-Submodules
-----------
+
+databaseops\.mysql\.mysqltable module
+-------------------------------------
+
+.. automodule:: databaseops.mysql.mysqltable
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 databaseops\.mysql\.mysqldatabase module
 ----------------------------------------
@@ -12,18 +19,11 @@ databaseops\.mysql\.mysqldatabase module
     :undoc-members:
     :show-inheritance:
 
+
 databaseops\.mysql\.mysqlops module
 -----------------------------------
 
 .. automodule:: databaseops.mysql.mysqlops
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-databaseops\.mysql\.mysqltable module
--------------------------------------
-
-.. automodule:: databaseops.mysql.mysqltable
     :members:
     :undoc-members:
     :show-inheritance:

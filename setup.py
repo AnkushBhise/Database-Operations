@@ -1,6 +1,5 @@
 # coding=utf-8
 """Setup script for databaseops"""
-# TODO: Error cause if pandas is not preinstalled (Not Hard and fast, with assumption pandas is preinstalled)
 
 import os.path
 from setuptools import setup, find_packages

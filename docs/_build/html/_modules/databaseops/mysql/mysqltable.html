@@ -95,7 +95,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">DatabaseOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">Table of Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id1">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id4">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id5">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#roadmap">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id6">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id7">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id8">Project status</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../databaseops.mysql.html">databaseops.mysql package</a></li>
 </ul>
 
@@ -174,17 +181,29 @@
 
 
 <div class="viewcode-block" id="MySQLTable"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable">[docs]</a><span class="k">class</span> <span class="nc">MySQLTable</span><span class="p">(</span><span class="n">MySQLDataBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The object instance of this class will able to perform multiple operations</span>
+<span class="sd">    on database table like read, filter, sort, remove_duplicates, update etc.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    host : str</span>
+<span class="sd">        Host name of MySQL database.</span>
+
+<span class="sd">    user : str</span>
+<span class="sd">        User name of MySQL database.</span>
+
+<span class="sd">    password : str</span>
+<span class="sd">        Password for above user name of MySQL database.</span>
+
+<span class="sd">    db_name : str</span>
+<span class="sd">        Any MySQL database name from MySQL database, which you want connect.</span>
+
+<span class="sd">    table_name : str</span>
+<span class="sd">        Table name from above MySQL database, which you want connect.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">db_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The object instance of this class will able to perform multiple operations</span>
-<span class="sd">        on database table like read, filter, sort, remove_duplicates, update etc.</span>
-<span class="sd">        :param host: Host name of MySQL database.</span>
-<span class="sd">        :param user: User name of MySQL database.</span>
-<span class="sd">        :param password: Password for above user name of MySQL database.</span>
-<span class="sd">        :param db_name: Any MySQL database name from MySQL database.</span>
-<span class="sd">        :param table_name: Table name from above MySQL database.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span>
                 <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;db_name&quot;</span><span class="p">):</span>
             <span class="n">MySQLDataBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">db_name</span><span class="p">)</span>
@@ -195,10 +214,17 @@
     <span class="k">def</span> <span class="nf">__update_insertion_method</span><span class="p">(</span><span class="n">meta</span><span class="p">:</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">MetaData</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This is privet method. Created for internal used only.</span>
-<span class="sd">        :param meta: This is the metadata for MySQL database table.</span>
-<span class="sd">        :return: It returns the method which will be used into update_table.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        meta : sqlalchemy.MetaData</span>
+<span class="sd">            This is the metadata for MySQL database table.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Method</span>
+<span class="sd">            It returns the method which will be used into update_table.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        
         <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">data_iter</span><span class="p">):</span>
             <span class="n">sql_table</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">meta</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">insert_stmt</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">dialects</span><span class="o">.</span><span class="n">mysql</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">sql_table</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span>
@@ -211,7 +237,11 @@
     <span class="k">def</span> <span class="nf">__sqlalchemy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This is privet method. Created for internal used only.</span>
-<span class="sd">        :return: None, But create sqlalchemy_engine.connect inside object instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            But create sqlalchemy_engine.connect inside object instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sqlalchemy_engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;mysql+pymysql://</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">db_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
@@ -219,24 +249,67 @@
     
 <div class="viewcode-block" id="MySQLTable.populate_table"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable.populate_table">[docs]</a>    <span class="k">def</span> <span class="nf">populate_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">if_exists</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;append&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method add dataframe data to MySQL table.</span>
-<span class="sd">        :param dataframe: This is pandas.DataFrame which need to added to table.</span>
-<span class="sd">        :param if_exists: This parameter will decide what to do if table name</span>
-<span class="sd">        table_name already exists. Options are &#39;fail&#39;, &#39;replace&#39; and &#39;append&#39;.</span>
-<span class="sd">        **Note:** This parameter is about table, Don&#39;t confuse it about data inside table.</span>
-<span class="sd">        :return: None.</span>
+<span class="sd">        This method append dataframe data to MySQL table.</span>
+<span class="sd">        </span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            if_exists : This parameter is about table, Don&#39;t confuse it about</span>
+<span class="sd">            data inside table.</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will add the data to database table.</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.populate_table(dataframe = Data)``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dataframe : pandas.DataFrame</span>
+<span class="sd">            Data which need to added to table.</span>
+<span class="sd">        </span>
+<span class="sd">        if_exists : str</span>
+<span class="sd">            This parameter will decide what to do if table name</span>
+<span class="sd">            table_name already exists. Options are &#39;fail&#39;, &#39;replace&#39; and &#39;append&#39;.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            It returns nothing.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dataframe</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sqlalchemy_engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="n">if_exists</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="MySQLTable.update_table"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable.update_table">[docs]</a>    <span class="k">def</span> <span class="nf">update_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">if_exists</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;append&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method will replace data in table if it already exist based upon primary</span>
-<span class="sd">        key of table.</span>
-<span class="sd">        :param dataframe: This is pandas.DataFrame which need to added to table.</span>
-<span class="sd">        :param if_exists: This parameter will decide what to do if table name</span>
-<span class="sd">        table_name already exists. Options are &#39;fail&#39;, &#39;replace&#39; and &#39;append&#39;.</span>
-<span class="sd">        **Note:** This parameter is about table, Don&#39;t confuse it about data inside table.</span>
-<span class="sd">        :return: None.</span>
+<span class="sd">        This method will replace data in table if it already exist based upon</span>
+<span class="sd">        duplicate values in primary key of table.</span>
+<span class="sd">        </span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            It will directly affect the source table with no way of going</span>
+<span class="sd">            back previous point.</span>
+<span class="sd">        </span>
+<span class="sd">            if_exists : This parameter is about table, Don&#39;t confuse it about</span>
+<span class="sd">            data inside table.</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will update the data on primary key in database table.</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.update_table(dataframe = Data)``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dataframe : pandas.DataFrame</span>
+<span class="sd">            Data which need to added to table.</span>
+<span class="sd">        </span>
+<span class="sd">        if_exists : str</span>
+<span class="sd">            This parameter will decide what to do if table_name already</span>
+<span class="sd">            exists. Options are &#39;fail&#39;, &#39;replace&#39; and &#39;append&#39;.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            This returns nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
             <span class="n">meta</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">MetaData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">)</span>
@@ -245,8 +318,18 @@
     
 <div class="viewcode-block" id="MySQLTable.get_data_type"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable.get_data_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_data_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method will give you column name and there data type for entire table.</span>
-<span class="sd">        :return: dictionary with column name as key and data type as value.</span>
+<span class="sd">        Use this method to get column name and there data type for entire table.</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will column name and there data type of table</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.get_data_type()``</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Dictionary with column name as key and data type as value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">my_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Show fields from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">my_cursor</span><span class="p">}</span></div>
@@ -254,11 +337,29 @@
 <div class="viewcode-block" id="MySQLTable.remove_duplicates"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable.remove_duplicates">[docs]</a>    <span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_of_columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method will delete duplicates rows from table based upon give list</span>
-<span class="sd">        of columns. Be caution, as it will directly affect the source table with</span>
-<span class="sd">        no way of going back.</span>
-<span class="sd">        :param list_of_columns: list of columns names which should be used for</span>
-<span class="sd">        removing duplicate values.</span>
-<span class="sd">        :return: None.</span>
+<span class="sd">        of columns.</span>
+<span class="sd">        </span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            It will directly affect the source table with no way of going</span>
+<span class="sd">            back previous point.</span>
+<span class="sd">            </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will remove duplicate values for list_of_columns</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.remove_duplicates(list_of_columns = [column_1, column_2])``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        list_of_columns : list</span>
+<span class="sd">            list of columns names which should be used for</span>
+<span class="sd">            removing duplicate values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            This returns nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing duplicate entries from columns </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">list_of_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">list_of_columns</span><span class="p">:</span>
@@ -269,14 +370,38 @@
     
 <div class="viewcode-block" id="MySQLTable.set_primary_key"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable.set_primary_key">[docs]</a>    <span class="k">def</span> <span class="nf">set_primary_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">:</span> <span class="nb">str</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">,</span> <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method will set &quot;column_name&quot; as primary key for table. caution: By</span>
-<span class="sd">        default it remove duplicate value for &quot;column_name&quot;.</span>
-<span class="sd">        :param column_name: If str, then it will set as primary key. If list, then</span>
-<span class="sd">        composite primary key will get created.</span>
-<span class="sd">        :param remove_duplicates: Either you want delete duplicate value for given</span>
-<span class="sd">        columns or not. Pass this as False if you don&#39;t to remove duplicate on given</span>
-<span class="sd">        columns, But it will raise exception and primary key will not be set. As</span>
-<span class="sd">        primary key need to have unique values.</span>
+<span class="sd">        This method will set column_name as primary key for table.</span>
+<span class="sd">        </span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            By default it remove duplicate value for column_name.</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will create composite primary key with columns_name. But if it</span>
+<span class="sd">        contains duplicate values currently, it will remove duplicate by default.</span>
+<span class="sd">        If you don&#39;t want remove duplicates, pass remove_duplicates=False. But</span>
+<span class="sd">        in that case if columns have duplicate values, method will fail and will</span>
+<span class="sd">        raise exception.</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.set_primary_key(column_name = [&quot;column_1&quot;, &quot;column_2&quot;])``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        column_name : str or list</span>
+<span class="sd">            If str, then it will set as primary key. If list, then</span>
+<span class="sd">            composite primary key will get created.</span>
+<span class="sd">        </span>
+<span class="sd">        remove_duplicates : bool</span>
+<span class="sd">            Either you want delete duplicate value for given</span>
+<span class="sd">            columns or not. Pass this as False if you don&#39;t to remove duplicate on given</span>
+<span class="sd">            columns, But it will raise exception and primary key will not be set. As</span>
+<span class="sd">            primary key need to have unique values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            This returns nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">column_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">column_name</span><span class="p">]</span>
@@ -294,10 +419,35 @@
 <div class="viewcode-block" id="MySQLTable.set_unique_keys"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable.set_unique_keys">[docs]</a>    <span class="k">def</span> <span class="nf">set_unique_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column_name</span><span class="p">:</span> <span class="nb">str</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">,</span> <span class="n">remove_duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method will set columns to contain only unique values.</span>
-<span class="sd">        :param column_name: Column names of database table.</span>
-<span class="sd">        :param remove_duplicates: Either you want delete duplicate value for given</span>
-<span class="sd">        columns or not. Pass this as False, if you don&#39;t to remove duplicate on given</span>
-<span class="sd">        columns, But it will raise exception.</span>
+<span class="sd">        </span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            This method will directly affect source table.</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will set columns to have unique values in future. But if it contains</span>
+<span class="sd">        duplicate values currently, it will fail and raise exception. If you want</span>
+<span class="sd">        to set columns to have unique values, keep remove_duplicates argument to</span>
+<span class="sd">        True or don&#39;t pass it at all.</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.set_unique_keys(column_name = [&quot;column_1&quot;, &quot;column_2&quot;], remove_duplicates=False)``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        column_name : str or list</span>
+<span class="sd">            Column names from database table which should have unique</span>
+<span class="sd">            values.</span>
+<span class="sd">        </span>
+<span class="sd">        remove_duplicates: bool</span>
+<span class="sd">            Either you want delete duplicate value for given</span>
+<span class="sd">            columns or not. Pass this as False, if you don&#39;t to remove duplicate on given</span>
+<span class="sd">            columns, But it will raise exception.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            This returns nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">column_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">column_name</span><span class="p">]</span>
@@ -315,9 +465,28 @@
 <div class="viewcode-block" id="MySQLTable.sort_table"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqltable.MySQLTable.sort_table">[docs]</a>    <span class="k">def</span> <span class="nf">sort_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;ascending&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method will perform sort operation on source database table.</span>
-<span class="sd">        :param column: Base on this sorting operation will be performed.</span>
-<span class="sd">        :param order: Order of sorting, Which can &quot;ascending&quot; or &quot;descending&quot;</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        </span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">            This method will directly affect source table.</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        ``self.sort_table(column = &quot;column_1&quot;, order=&quot;descending&quot;)``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        column : str or dict</span>
+<span class="sd">            Columns will used for sorting operation.</span>
+<span class="sd">        </span>
+<span class="sd">        order : str</span>
+<span class="sd">            Order of sorting, Which can &quot;ascending&quot; or &quot;descending&quot;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            This returns nothing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT * FROM </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> ORDER BY </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -334,14 +503,38 @@
                      <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">chunksize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        If you want read filtered table use this method.</span>
-<span class="sd">        :param where: list of conditions in string format. Ex: [&quot;column_Name = value&quot;]</span>
-<span class="sd">         OR [&quot;column_Name = Value and  column_Name &gt; Value&quot;] OR</span>
-<span class="sd">         [&quot;column_Name = Value OR column_Name &gt; Value&quot;]</span>
-<span class="sd">        :param select: Will only return data for these columns. If None, will</span>
-<span class="sd">        return complete data</span>
-<span class="sd">        :param limit: Number of rows</span>
-<span class="sd">        :param chunksize: Number of rows in one iteration.</span>
-<span class="sd">        :return: pandas.DataFrame if chunksize is None else iterable object.</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will return object filtered on where argument and chunksize of 100</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.table_filter(where = [&quot;column_Name = value&quot;], select = None, limit = None, chunksize = 100)``</span>
+<span class="sd">        </span>
+<span class="sd">        This are examples with multiple where condition.</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.table_filter(where = [&quot;column_Name = Value and  column_Name &gt; Value&quot;], chunksize = 100)``</span>
+<span class="sd">                    </span>
+<span class="sd">        ``self.table_filter(where = [&quot;column_Name = Value or  column_Name &gt; Value&quot;], chunksize = 100)``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        where : list</span>
+<span class="sd">            list of conditions in string format.</span>
+<span class="sd">        </span>
+<span class="sd">        select : str</span>
+<span class="sd">            Will only return data for these columns. If None, will</span>
+<span class="sd">            return complete data.</span>
+<span class="sd">        </span>
+<span class="sd">        limit : int</span>
+<span class="sd">            Number of rows.</span>
+<span class="sd">        </span>
+<span class="sd">        chunksize : int</span>
+<span class="sd">            Number of rows in one iteration.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.DataFrame or Object</span>
+<span class="sd">            pandas.DataFrame if chunksize is None else iterable object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">select</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">select</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -360,8 +553,22 @@
 <span class="sd">        This method will read table as pandas.DataFrame if chunksize is not given else</span>
 <span class="sd">        it will return object which can be iterated in for loop every loop will</span>
 <span class="sd">        given pandas.DataFrame of chunksize.</span>
-<span class="sd">        :param chunksize: number of row you want read at one time.</span>
-<span class="sd">        :return: pandas.DataFrame or Iterable object which will give pandas.DataFrame</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        This will return object filtered on where argument and chunksize of 100</span>
+<span class="sd">        </span>
+<span class="sd">        ``self.read_table(where = [&quot;column_Name = value&quot;], select = None, limit = None, chunksize = 100)``</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chunksize : int</span>
+<span class="sd">            number of row you want read at one time.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.DataFrame or Iterable object</span>
+<span class="sd">            pandas.DataFrame or Iterable object which will give pandas.DataFrame</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="n">table_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table_name</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sqlalchemy_engine</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="n">chunksize</span><span class="p">)</span></div></div>
 </pre></div>

@@ -98,10 +98,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html">DatabaseOps</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">databaseops.mysql package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-databaseops.mysql.mysqltable">databaseops.mysql.mysqltable module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-databaseops.mysql.mysqldatabase">databaseops.mysql.mysqldatabase module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-databaseops.mysql.mysqlops">databaseops.mysql.mysqlops module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-databaseops.mysql.mysqltable">databaseops.mysql.mysqltable module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-databaseops.mysql">Module contents</a></li>
 </ul>
 </li>
@@ -172,8 +171,310 @@
             
   <div class="section" id="databaseops-mysql-package">
 <h1>databaseops.mysql package<a class="headerlink" href="#databaseops-mysql-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-databaseops.mysql.mysqltable">
+<span id="databaseops-mysql-mysqltable-module"></span><h2>databaseops.mysql.mysqltable module<a class="headerlink" href="#module-databaseops.mysql.mysqltable" title="Permalink to this headline">¶</a></h2>
+<p>This file is for mysql database connection for user to use database operations as dataframe operations</p>
+<dl class="class">
+<dt id="databaseops.mysql.mysqltable.MySQLTable">
+<em class="property">class </em><code class="descclassname">databaseops.mysql.mysqltable.</code><code class="descname">MySQLTable</code><span class="sig-paren">(</span><em>host: str</em>, <em>user: str</em>, <em>password: str</em>, <em>db_name: str</em>, <em>table_name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#databaseops.mysql.mysqldatabase.MySQLDataBase" title="databaseops.mysql.mysqldatabase.MySQLDataBase"><code class="xref py py-class docutils literal"><span class="pre">databaseops.mysql.mysqldatabase.MySQLDataBase</span></code></a></p>
+<p>The object instance of this class will able to perform multiple operations
+on database table like read, filter, sort, remove_duplicates, update etc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>host</strong> (<em>str</em>) -- Host name of MySQL database.</li>
+<li><strong>user</strong> (<em>str</em>) -- User name of MySQL database.</li>
+<li><strong>password</strong> (<em>str</em>) -- Password for above user name of MySQL database.</li>
+<li><strong>db_name</strong> (<em>str</em>) -- Any MySQL database name from MySQL database, which you want connect.</li>
+<li><strong>table_name</strong> (<em>str</em>) -- Table name from above MySQL database, which you want connect.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.get_data_type">
+<code class="descname">get_data_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.get_data_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.get_data_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to get column name and there data type for entire table.</p>
+<p class="rubric">Example</p>
+<p>This will column name and there data type of table</p>
+<p><code class="docutils literal"><span class="pre">self.get_data_type()</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with column name as key and data type as value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.populate_table">
+<code class="descname">populate_table</code><span class="sig-paren">(</span><em>dataframe: pandas.core.frame.DataFrame</em>, <em>if_exists: str = 'append'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.populate_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.populate_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method append dataframe data to MySQL table.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">if_exists : This parameter is about table, Don't confuse it about
+data inside table.</p>
+</div>
+<p class="rubric">Example</p>
+<p>This will add the data to database table.</p>
+<p><code class="docutils literal"><span class="pre">self.populate_table(dataframe</span> <span class="pre">=</span> <span class="pre">Data)</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dataframe</strong> (<em>pandas.DataFrame</em>) -- Data which need to added to table.</li>
+<li><strong>if_exists</strong> (<em>str</em>) -- This parameter will decide what to do if table name
+table_name already exists. Options are 'fail', 'replace' and 'append'.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">It returns nothing.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.read_table">
+<code class="descname">read_table</code><span class="sig-paren">(</span><em>chunksize: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.read_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.read_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will read table as pandas.DataFrame if chunksize is not given else
+it will return object which can be iterated in for loop every loop will
+given pandas.DataFrame of chunksize.</p>
+<p class="rubric">Example</p>
+<p>This will return object filtered on where argument and chunksize of 100</p>
+<p><code class="docutils literal"><span class="pre">self.read_table(where</span> <span class="pre">=</span> <span class="pre">[&quot;column_Name</span> <span class="pre">=</span> <span class="pre">value&quot;],</span> <span class="pre">select</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">limit</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">chunksize</span> <span class="pre">=</span> <span class="pre">100)</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>chunksize</strong> (<em>int</em>) -- number of row you want read at one time.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">pandas.DataFrame or Iterable object which will give pandas.DataFrame</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pandas.DataFrame or Iterable object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.remove_duplicates">
+<code class="descname">remove_duplicates</code><span class="sig-paren">(</span><em>list_of_columns: list</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.remove_duplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.remove_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will delete duplicates rows from table based upon give list
+of columns.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It will directly affect the source table with no way of going
+back previous point.</p>
+</div>
+<p class="rubric">Example</p>
+<p>This will remove duplicate values for list_of_columns</p>
+<p><code class="docutils literal"><span class="pre">self.remove_duplicates(list_of_columns</span> <span class="pre">=</span> <span class="pre">[column_1,</span> <span class="pre">column_2])</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>list_of_columns</strong> (<em>list</em>) -- list of columns names which should be used for
+removing duplicate values.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">This returns nothing</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.set_primary_key">
+<code class="descname">set_primary_key</code><span class="sig-paren">(</span><em>column_name: str</em>, <em>remove_duplicates=True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.set_primary_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.set_primary_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will set column_name as primary key for table.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default it remove duplicate value for column_name.</p>
+</div>
+<p class="rubric">Example</p>
+<p>This will create composite primary key with columns_name. But if it
+contains duplicate values currently, it will remove duplicate by default.
+If you don't want remove duplicates, pass remove_duplicates=False. But
+in that case if columns have duplicate values, method will fail and will
+raise exception.</p>
+<p><code class="docutils literal"><span class="pre">self.set_primary_key(column_name</span> <span class="pre">=</span> <span class="pre">[&quot;column_1&quot;,</span> <span class="pre">&quot;column_2&quot;])</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column_name</strong> (<em>str</em><em> or </em><em>list</em>) -- If str, then it will set as primary key. If list, then
+composite primary key will get created.</li>
+<li><strong>remove_duplicates</strong> (<em>bool</em>) -- Either you want delete duplicate value for given
+columns or not. Pass this as False if you don't to remove duplicate on given
+columns, But it will raise exception and primary key will not be set. As
+primary key need to have unique values.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">This returns nothing</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.set_unique_keys">
+<code class="descname">set_unique_keys</code><span class="sig-paren">(</span><em>column_name: str</em>, <em>remove_duplicates=True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.set_unique_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.set_unique_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will set columns to contain only unique values.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method will directly affect source table.</p>
+</div>
+<p class="rubric">Example</p>
+<p>This will set columns to have unique values in future. But if it contains
+duplicate values currently, it will fail and raise exception. If you want
+to set columns to have unique values, keep remove_duplicates argument to
+True or don't pass it at all.</p>
+<p><code class="docutils literal"><span class="pre">self.set_unique_keys(column_name</span> <span class="pre">=</span> <span class="pre">[&quot;column_1&quot;,</span> <span class="pre">&quot;column_2&quot;],</span> <span class="pre">remove_duplicates=False)</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column_name</strong> (<em>str</em><em> or </em><em>list</em>) -- Column names from database table which should have unique
+values.</li>
+<li><strong>remove_duplicates</strong> (<em>bool</em>) -- Either you want delete duplicate value for given
+columns or not. Pass this as False, if you don't to remove duplicate on given
+columns, But it will raise exception.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">This returns nothing</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.sort_table">
+<code class="descname">sort_table</code><span class="sig-paren">(</span><em>column: str</em>, <em>order='ascending'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.sort_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.sort_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will perform sort operation on source database table.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method will directly affect source table.</p>
+</div>
+<p class="rubric">Example</p>
+<p><code class="docutils literal"><span class="pre">self.sort_table(column</span> <span class="pre">=</span> <span class="pre">&quot;column_1&quot;,</span> <span class="pre">order=&quot;descending&quot;)</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>column</strong> (<em>str</em><em> or </em><em>dict</em>) -- Columns will used for sorting operation.</li>
+<li><strong>order</strong> (<em>str</em>) -- Order of sorting, Which can &quot;ascending&quot; or &quot;descending&quot;</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">This returns nothing</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.table_filter">
+<code class="descname">table_filter</code><span class="sig-paren">(</span><em>where: list</em>, <em>select: str = None</em>, <em>limit: int = None</em>, <em>chunksize: int = None</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.table_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.table_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you want read filtered table use this method.</p>
+<p class="rubric">Example</p>
+<p>This will return object filtered on where argument and chunksize of 100</p>
+<p><code class="docutils literal"><span class="pre">self.table_filter(where</span> <span class="pre">=</span> <span class="pre">[&quot;column_Name</span> <span class="pre">=</span> <span class="pre">value&quot;],</span> <span class="pre">select</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">limit</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">chunksize</span> <span class="pre">=</span> <span class="pre">100)</span></code></p>
+<p>This are examples with multiple where condition.</p>
+<p><code class="docutils literal"><span class="pre">self.table_filter(where</span> <span class="pre">=</span> <span class="pre">[&quot;column_Name</span> <span class="pre">=</span> <span class="pre">Value</span> <span class="pre">and</span>&#160; <span class="pre">column_Name</span> <span class="pre">&gt;</span> <span class="pre">Value&quot;],</span> <span class="pre">chunksize</span> <span class="pre">=</span> <span class="pre">100)</span></code></p>
+<p><code class="docutils literal"><span class="pre">self.table_filter(where</span> <span class="pre">=</span> <span class="pre">[&quot;column_Name</span> <span class="pre">=</span> <span class="pre">Value</span> <span class="pre">or</span>&#160; <span class="pre">column_Name</span> <span class="pre">&gt;</span> <span class="pre">Value&quot;],</span> <span class="pre">chunksize</span> <span class="pre">=</span> <span class="pre">100)</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>where</strong> (<em>list</em>) -- list of conditions in string format.</li>
+<li><strong>select</strong> (<em>str</em>) -- Will only return data for these columns. If None, will
+return complete data.</li>
+<li><strong>limit</strong> (<em>int</em>) -- Number of rows.</li>
+<li><strong>chunksize</strong> (<em>int</em>) -- Number of rows in one iteration.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pandas.DataFrame if chunksize is None else iterable object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame or Object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="databaseops.mysql.mysqltable.MySQLTable.update_table">
+<code class="descname">update_table</code><span class="sig-paren">(</span><em>dataframe: pandas.core.frame.DataFrame</em>, <em>if_exists: str = 'append'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.update_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.update_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will replace data in table if it already exist based upon
+duplicate values in primary key of table.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It will directly affect the source table with no way of going
+back previous point.</p>
+<p class="last">if_exists : This parameter is about table, Don't confuse it about
+data inside table.</p>
+</div>
+<p class="rubric">Example</p>
+<p>This will update the data on primary key in database table.</p>
+<p><code class="docutils literal"><span class="pre">self.update_table(dataframe</span> <span class="pre">=</span> <span class="pre">Data)</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dataframe</strong> (<em>pandas.DataFrame</em>) -- Data which need to added to table.</li>
+<li><strong>if_exists</strong> (<em>str</em>) -- This parameter will decide what to do if table_name already
+exists. Options are 'fail', 'replace' and 'append'.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">This returns nothing</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-databaseops.mysql.mysqldatabase">
 <span id="databaseops-mysql-mysqldatabase-module"></span><h2>databaseops.mysql.mysqldatabase module<a class="headerlink" href="#module-databaseops.mysql.mysqldatabase" title="Permalink to this headline">¶</a></h2>
@@ -195,125 +496,19 @@
 <dl class="method">
 <dt id="databaseops.mysql.mysqlops.MySQLOps.join_table">
 <code class="descname">join_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/databaseops/mysql/mysqlops.html#MySQLOps.join_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqlops.MySQLOps.join_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>TODO: create join table with foreign key
-This method is not working yet.
-use yield to achieve iteration over object and commit changes into same table or create new table
-:return: pandas dataframe if chuck size is given, databaseops.MySQL object</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-databaseops.mysql.mysqltable">
-<span id="databaseops-mysql-mysqltable-module"></span><h2>databaseops.mysql.mysqltable module<a class="headerlink" href="#module-databaseops.mysql.mysqltable" title="Permalink to this headline">¶</a></h2>
-<p>This file is for mysql database connection for user to use database operations as dataframe operations</p>
-<dl class="class">
-<dt id="databaseops.mysql.mysqltable.MySQLTable">
-<em class="property">class </em><code class="descclassname">databaseops.mysql.mysqltable.</code><code class="descname">MySQLTable</code><span class="sig-paren">(</span><em>host: str</em>, <em>user: str</em>, <em>password: str</em>, <em>db_name: str</em>, <em>table_name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#databaseops.mysql.mysqldatabase.MySQLDataBase" title="databaseops.mysql.mysqldatabase.MySQLDataBase"><code class="xref py py-class docutils literal"><span class="pre">databaseops.mysql.mysqldatabase.MySQLDataBase</span></code></a></p>
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.get_data_type">
-<code class="descname">get_data_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.get_data_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.get_data_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will give you column name and there data type for entire table.
-:return: dictionary with column name as key and data type as value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.populate_table">
-<code class="descname">populate_table</code><span class="sig-paren">(</span><em>dataframe: pandas.core.frame.DataFrame</em>, <em>if_exists: str = 'append'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.populate_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.populate_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method add dataframe data to MySQL table.
-:param dataframe: This is pandas.DataFrame which need to added to table.
-:param if_exists: This parameter will decide what to do if table name
-table_name already exists. Options are 'fail', 'replace' and 'append'.
-<strong>Note:</strong> This parameter is about table, Don't confuse it about data inside table.
-:return: None.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.read_table">
-<code class="descname">read_table</code><span class="sig-paren">(</span><em>chunksize: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.read_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.read_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will read table as pandas.DataFrame if chunksize is not given else
-it will return object which can be iterated in for loop every loop will
-given pandas.DataFrame of chunksize.
-:param chunksize: number of row you want read at one time.
-:return: pandas.DataFrame or Iterable object which will give pandas.DataFrame</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.remove_duplicates">
-<code class="descname">remove_duplicates</code><span class="sig-paren">(</span><em>list_of_columns: list</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.remove_duplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.remove_duplicates" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will delete duplicates rows from table based upon give list
-of columns. Be caution, as it will directly affect the source table with
-no way of going back.
-:param list_of_columns: list of columns names which should be used for
-removing duplicate values.
-:return: None.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.set_primary_key">
-<code class="descname">set_primary_key</code><span class="sig-paren">(</span><em>column_name: str</em>, <em>remove_duplicates=True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.set_primary_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.set_primary_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will set &quot;column_name&quot; as primary key for table. caution: By
-default it remove duplicate value for &quot;column_name&quot;.
-:param column_name: If str, then it will set as primary key. If list, then
-composite primary key will get created.
-:param remove_duplicates: Either you want delete duplicate value for given
-columns or not. Pass this as False if you don't to remove duplicate on given
-columns, But it will raise exception and primary key will not be set. As
-primary key need to have unique values.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.set_unique_keys">
-<code class="descname">set_unique_keys</code><span class="sig-paren">(</span><em>column_name: str</em>, <em>remove_duplicates=True</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.set_unique_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.set_unique_keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will set columns to contain only unique values.
-:param column_name: Column names of database table.
-:param remove_duplicates: Either you want delete duplicate value for given
-columns or not. Pass this as False, if you don't to remove duplicate on given
-columns, But it will raise exception.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.sort_table">
-<code class="descname">sort_table</code><span class="sig-paren">(</span><em>column: str</em>, <em>order='ascending'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.sort_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.sort_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will perform sort operation on source database table.
-:param column: Base on this sorting operation will be performed.
-:param order: Order of sorting, Which can &quot;ascending&quot; or &quot;descending&quot;
-:return: None</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.table_filter">
-<code class="descname">table_filter</code><span class="sig-paren">(</span><em>where: list</em>, <em>select: str = None</em>, <em>limit: int = None</em>, <em>chunksize: int = None</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.table_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.table_filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>If you want read filtered table use this method.
-:param where: list of conditions in string format. Ex: [&quot;column_Name = value&quot;]</p>
-<blockquote>
-<div>OR [&quot;column_Name = Value and  column_Name &gt; Value&quot;] OR
-[&quot;column_Name = Value OR column_Name &gt; Value&quot;]</div></blockquote>
+<dd><p>This method is not working yet.
+TODO: create join table with foreign key, use yield to achieve iteration
+over object and commit changes into same table or create new table</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>select</strong> -- Will only return data for these columns. If None, will</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pandas.DataFrame</td>
 </tr>
 </tbody>
 </table>
-<p>return complete data
-:param limit: Number of rows
-:param chunksize: Number of rows in one iteration.
-:return: pandas.DataFrame if chunksize is None else iterable object.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="databaseops.mysql.mysqltable.MySQLTable.update_table">
-<code class="descname">update_table</code><span class="sig-paren">(</span><em>dataframe: pandas.core.frame.DataFrame</em>, <em>if_exists: str = 'append'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/databaseops/mysql/mysqltable.html#MySQLTable.update_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#databaseops.mysql.mysqltable.MySQLTable.update_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method will replace data in table if it already exist based upon primary
-key of table.
-:param dataframe: This is pandas.DataFrame which need to added to table.
-:param if_exists: This parameter will decide what to do if table name
-table_name already exists. Options are 'fail', 'replace' and 'append'.
-<strong>Note:</strong> This parameter is about table, Don't confuse it about data inside table.
-:return: None.</p>
 </dd></dl>
 
 </dd></dl>

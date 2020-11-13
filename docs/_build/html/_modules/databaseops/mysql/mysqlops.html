@@ -95,7 +95,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">DatabaseOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html">Table of Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id1">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id4">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id5">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#roadmap">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id6">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id7">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme_link.html#id8">Project status</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../databaseops.mysql.html">databaseops.mysql package</a></li>
 </ul>
 
@@ -174,23 +181,33 @@
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">db_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This class is in development mode, not working yet.</span>
-<span class="sd">        This class inherits  MySQLTable and ListConversion.</span>
-<span class="sd">        Purpose of this is to perform multiple table operations like join. But</span>
-<span class="sd">        currently it is in development process, Not completed yet.</span>
-<span class="sd">        :param host: Host name of MySQL database.</span>
-<span class="sd">        :param user: User name of MySQL database.</span>
-<span class="sd">        :param password: Password for above user name of MySQL database.</span>
-<span class="sd">        :param db_name: Any MySQL database name from MySQL database.</span>
+<span class="sd">        This class is in development mode, not working yet. This class inherits</span>
+<span class="sd">        MySQLTable and ListConversion. Purpose of this is to perform multiple</span>
+<span class="sd">        table operations like join. But currently it is in development process,</span>
+<span class="sd">        Not completed yet.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        host : Host name of MySQL database.</span>
+<span class="sd">        </span>
+<span class="sd">        user : User name of MySQL database.</span>
+<span class="sd">        </span>
+<span class="sd">        password : Password for above user name of MySQL database.</span>
+<span class="sd">        </span>
+<span class="sd">        db_name : Any MySQL database name from MySQL database, which you want</span>
+<span class="sd">        connect.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">MySQLDataBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span> <span class="n">db_name</span><span class="o">=</span><span class="n">db_name</span><span class="p">)</span>
     
 <div class="viewcode-block" id="MySQLOps.join_table"><a class="viewcode-back" href="../../../databaseops.mysql.html#databaseops.mysql.mysqlops.MySQLOps.join_table">[docs]</a>    <span class="k">def</span> <span class="nf">join_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        TODO: create join table with foreign key</span>
 <span class="sd">        This method is not working yet.</span>
-<span class="sd">        use yield to achieve iteration over object and commit changes into same table or create new table</span>
-<span class="sd">        :return: pandas dataframe if chuck size is given, databaseops.MySQL object</span>
+<span class="sd">        TODO: create join table with foreign key, use yield to achieve iteration</span>
+<span class="sd">        over object and commit changes into same table or create new table</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.DataFrame</span>
 <span class="sd">        &quot;&quot;&quot;</span></div></div>
 </pre></div>
 

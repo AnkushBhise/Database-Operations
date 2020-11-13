@@ -16,10 +16,17 @@ class MySQLDataBase(ListConversion):
         Otherwise it will create database name as db_name, will connect to that
         database. Object instance of this class will contain connection link and
         cursor link to given database.
-        :param host: Host name of MySQL database.
-        :param user: User name of MySQL database.
-        :param password: Password for above user name of MySQL database.
-        :param db_name: Any MySQL database name from MySQL database.
+        
+        Parameters
+        ----------
+        host : Host name of MySQL database.
+        
+        user : User name of MySQL database.
+        
+        password : Password for above user name of MySQL database.
+        
+        db_name : Any MySQL database name from MySQL database, which you want
+        connect.
         """
         self.db_name = db_name
         self.host = host
@@ -29,10 +36,17 @@ class MySQLDataBase(ListConversion):
     
     def __initial_conn_db(self, **kwargs: object) -> [pymysql.connections.Connection, pymysql.cursors.Cursor]:
         """
+        This is privet method. Created for internal used only.
         
-        :param kwargs: Args like database will be passed.
-        :return: connection link and cursor link to given database, If database
-        argument is not given connection link and cursor link entire MySQL database.
+        Parameters
+        ----------
+        kwargs : Args like database will be passed.
+
+        Returns
+        -------
+        pymysql.connections.Connection, pymysql.cursors.Cursor
+            connection link and cursor link to given database, If database
+            argument is not given connection link and cursor link entire MySQL database.
         """
         my_db = pymysql.connect(host=self.host, user=self.user, passwd=self.password, **kwargs)
         my_cursor = my_db.cursor()
@@ -40,10 +54,14 @@ class MySQLDataBase(ListConversion):
 
     def __initialize_database(self) -> None:
         """
-        
+        This is privet method. Created for internal used only.
         This method create connection link and cursor link for given db_name inside
         object instance
-        :return: None
+        
+        Returns
+        -------
+        None
+            This methods returns nothing
         """
         db, cursor = self.__initial_conn_db()
         cursor.execute("Show Databases")
