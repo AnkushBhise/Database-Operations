@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+#
 import sphinx_rtd_theme
 import m2r
 from recommonmark.parser import CommonMarkParser
 
+
 # DatabaseOps documentation build configuration file, created by
-# sphinx-quickstart on Wed Nov 11 06:16:22 2020.
+# sphinx-quickstart on Fri Nov 27 09:56:03 2020.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -23,8 +24,8 @@ from recommonmark.parser import CommonMarkParser
 #
 import os
 import sys
-
 sys.path.insert(0, os.path.abspath('..'))
+
 
 # -- General configuration ------------------------------------------------
 
@@ -39,16 +40,15 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', 'sphinx.ext.githubpag
               "sphinx.ext.napoleon"]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['.templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-
 # source_suffix = ['.rst', '.md']
 source_suffix = '.rst'
 
-# The master toctree document
+# The master toctree document.
 master_doc = 'index'
 
 # General information about the project.
@@ -75,13 +75,14 @@ language = 'English'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['.build', 'Thumbs.db', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
+
 
 # -- Options for HTML output ----------------------------------------------
 
@@ -99,7 +100,7 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['.static']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -107,14 +108,18 @@ html_static_path = ['_static']
 # This is required for the alabaster theme
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
-    '**': ['relations.html',  # needs 'show_related': True theme option to display
-        'searchbox.html', ]
+    '**': [
+        'relations.html',  # needs 'show_related': True theme option to display
+        'searchbox.html',
+    ]
 }
+
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'DatabaseOpsdoc'
+
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -122,15 +127,15 @@ latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
-    
+
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-    
+
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-    
+
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
@@ -139,19 +144,32 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [(master_doc, 'DatabaseOps.tex', 'DatabaseOps Documentation', 'Ankush Bhise', 'manual'), ]
+latex_documents = [
+    (master_doc, 'DatabaseOps.tex', 'DatabaseOps Documentation',
+     'Ankush Bhise', 'manual'),
+]
+
 
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, 'databaseops', 'DatabaseOps Documentation', [author], 1)]
+man_pages = [
+    (master_doc, 'databaseops', 'DatabaseOps Documentation',
+     [author], 1)
+]
+
 
 # -- Options for Texinfo output -------------------------------------------
 
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
-texinfo_documents = [(
-master_doc, 'DatabaseOps', 'DatabaseOps Documentation', author, 'DatabaseOps', 'One line description of project.',
-'Miscellaneous'), ]
+texinfo_documents = [
+    (master_doc, 'DatabaseOps', 'DatabaseOps Documentation',
+     author, 'DatabaseOps', 'One line description of project.',
+     'Miscellaneous'),
+]
+
+
+

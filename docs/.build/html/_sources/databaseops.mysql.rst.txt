@@ -1,7 +1,6 @@
 databaseops\.mysql package
 ==========================
 
-
 databaseops\.mysql\.mysqltable module
 -------------------------------------
 
@@ -10,7 +9,6 @@ databaseops\.mysql\.mysqltable module
     :undoc-members:
     :show-inheritance:
 
-
 databaseops\.mysql\.mysqldatabase module
 ----------------------------------------
 
@@ -18,7 +16,6 @@ databaseops\.mysql\.mysqldatabase module
     :members:
     :undoc-members:
     :show-inheritance:
-
 
 databaseops\.mysql\.mysqlops module
 -----------------------------------

@@ -1,5 +1,5 @@
-databaseops
-===========
+databaseops-gh-pages
+====================
 
 .. toctree::
    :maxdepth: 4
