@@ -25,7 +25,6 @@ databaseops\.mysql\.mysqlops module
     :undoc-members:
     :show-inheritance:
 
-
 Module contents
 ---------------
 
