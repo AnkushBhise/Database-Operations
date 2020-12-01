@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/databaseops.iml" filepath="$PROJECT_DIR$/.idea/databaseops.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/databaseops-gh-pages.iml" filepath="$PROJECT_DIR$/.idea/databaseops-gh-pages.iml" />
     </modules>
   </component>
 </project>
